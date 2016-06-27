@@ -1,0 +1,16 @@
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\bin\Debug\MySlideShow.exe.config
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\bin\Debug\MySlideShow.exe
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\bin\Debug\MySlideShow.pdb
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.csprojResolveAssemblyReference.cache
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.Properties.Resources.resources
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.csproj.GenerateResource.Cache
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.exe
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.pdb
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\bin\Debug\AForge.dll
+c:\users\ann\documents\visual studio 2015\Projects\MySlideShow\MySlideShow\bin\Debug\AForge.xml
+C:\Users\Ann\Documents\Visual Studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.ProgressForm.resources
+C:\Users\Ann\Documents\Visual Studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.SuccessForm.resources
+C:\Users\Ann\Documents\Visual Studio 2015\Projects\MySlideShow\MySlideShow\obj\Debug\MySlideShow.MainForm.resources
+C:\Users\Ann\Documents\GitHub\slide-show-app\MySlideShow\bin\Debug\MySlideShow.exe.config
+C:\Users\Ann\Documents\GitHub\slide-show-app\MySlideShow\obj\Debug\MySlideShow.exe
+C:\Users\Ann\Documents\GitHub\slide-show-app\MySlideShow\obj\Debug\MySlideShow.pdb
