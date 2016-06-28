@@ -73,7 +73,7 @@ namespace MySlideShow
                 ToArray();
 
             // sort photos
-            SortPhotos(photos, sortingMethod);
+            string [] sortedPhotos = SortPhotos(photos, sortingMethod);
 
             // get a corresponding video codec
             VideoCodec codec = GetVideoCodec(videoCodecName);
@@ -85,10 +85,10 @@ namespace MySlideShow
             writer.Open(videoOutputFile, width, height, 1, codec);
 
             int progress = 0;
-            for (int i = 0; i < photos.Length; i++)
+            for (int i = 0; i < sortedPhotos.Length; i++)
             {
 
-                string photoName = photos[i];
+                string photoName = sortedPhotos[i];
                 ProcessOnePhoto(
                     photoName,
                     width,
@@ -200,7 +200,7 @@ namespace MySlideShow
             }
         }
 
-        private static void SortPhotos(string[] photos, string sortingMethod)
+        private static string[] SortPhotos(string[] photos, string sortingMethod)
         {
             switch (sortingMethod)
             {
@@ -221,6 +221,8 @@ namespace MySlideShow
                     Array.Sort(photos);
                     break;
             }
+
+            return photos;
         }
 
         private static Point GetImageLocationInRectangle(
