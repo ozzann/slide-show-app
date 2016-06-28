@@ -16,23 +16,32 @@ namespace MySlideShow
 {
     public partial class ProgressForm : Form
     {
-        public string sortingMethod, photoDirectory, videoCodecName;
+        public string sortingMethod, photoDirectory, videoCodecName, videoOutputFile;
         public int slideDuration;
 
-        private static string videoOutputFile;
-        public static void SetOutputFile(string outputFile)
-        {
-            videoOutputFile = outputFile;
-        }
+        //public static string videoOutputFile;
+        //public string GetOutputFile()
+        //{
+        //    return videoOutputFile;
+        //}
 
-        public static string GetOutputFile()
-        {
-            return videoOutputFile;
-        }
+        public ProgressForm() { }
 
-        public ProgressForm()
+        public ProgressForm(
+            string sortingMethod,
+            string photoDirectory,
+            string videoOutputFile,
+            string videoCodecName,
+            int slideDuration
+            )
         {
             InitializeComponent();
+
+            this.sortingMethod = sortingMethod;
+            this.photoDirectory = photoDirectory;
+            this.videoCodecName = videoCodecName;
+            this.slideDuration = slideDuration;
+            this.videoOutputFile = videoOutputFile;
 
             recordVideoBackgroundWorker = new BackgroundWorker();
 
@@ -51,6 +60,7 @@ namespace MySlideShow
             recordVideoBackgroundWorker.RunWorkerAsync();
         }
 
+        // create instance of video write
         private static VideoFileWriter writer = new VideoFileWriter();
         private void recordVideoBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -72,8 +82,6 @@ namespace MySlideShow
             int width = 4000;
             int height = 3000;
 
-            // create instance of video writer
-
             writer.Open(videoOutputFile, width, height, 1, codec);
 
             int progress = 0;
@@ -89,9 +97,23 @@ namespace MySlideShow
                     writer
                 );
 
+                if (recordVideoBackgroundWorker.CancellationPending)
+                {
+                    writer.Close();
+                    e.Cancel = true;
+                    // delete video file
+                    if (File.Exists(videoOutputFile))
+                    {
+                        File.Delete(videoOutputFile);
+                    }
+                    return;
+                }
+
+                // show progress
                 progress += (int)(100 / photos.Length);
                 recordVideoBackgroundWorker.ReportProgress(progress);
             }
+
             writer.Close();
         }
 
@@ -100,7 +122,6 @@ namespace MySlideShow
         {
             int percentValue = e.ProgressPercentage >= 100 ?
                 100 : e.ProgressPercentage;
-
             recordingProgressBar.Value = percentValue;
         }
 
@@ -305,20 +326,14 @@ namespace MySlideShow
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             recordVideoBackgroundWorker.CancelAsync();
-            writer.Close();
-            if ( File.Exists(videoOutputFile) )
-            {
-                File.Delete(videoOutputFile);
-            }
-
             Close();
         }
 
         private void finishBtn_Click(object sender, EventArgs e)
         {
             Close();
-            Form SuccessForm = new SuccessForm();
-            SuccessForm.Show();
+            Form successForm = new SuccessForm(videoOutputFile);
+            successForm.Show();
         }
     }
 }

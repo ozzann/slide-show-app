@@ -36,7 +36,7 @@
             // 
             // recordingProgressBar
             // 
-            this.recordingProgressBar.Location = new System.Drawing.Point(37, 39);
+            this.recordingProgressBar.Location = new System.Drawing.Point(37, 42);
             this.recordingProgressBar.Name = "recordingProgressBar";
             this.recordingProgressBar.Size = new System.Drawing.Size(335, 28);
             this.recordingProgressBar.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 149);
+            this.ClientSize = new System.Drawing.Size(398, 151);
             this.Controls.Add(this.finishBtn);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.recordingProgressBar);

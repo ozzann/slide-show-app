@@ -15,7 +15,7 @@ using System.Drawing.Imaging;
 
 namespace MySlideShow
 {
-  
+
     public partial class MainForm : Form
     {
 
@@ -33,8 +33,6 @@ namespace MySlideShow
             videoOutputTextBox.Text = DEFAULT_OUTPUT_FILE;
 
         }
-
-        ProgressForm progressForm;
 
         private void photoDirBrowseBtn_Click(object sender, EventArgs e)
         {
@@ -79,8 +77,7 @@ namespace MySlideShow
             }
 
             // pass all necessary parameters from MainForm to ProgressForm
-            ProgressForm progressForm = new ProgressForm();
-            progressForm.sortingMethod = titleSortRadio.Checked ?
+            string sortingMethod = titleSortRadio.Checked ?
                "creation time" : timeSortRadio.Checked ?
                "title" : randomSortRadio.Checked ?
                "random" : DEFAULT_SORTING_METHOD;
@@ -88,11 +85,17 @@ namespace MySlideShow
             string videoOutputFile =
                 !String.IsNullOrWhiteSpace(videoOutputTextBox.Text) ?
                  videoOutputTextBox.Text : DEFAULT_OUTPUT_FILE;
-            ProgressForm.SetOutputFile(videoOutputFile);
 
-            progressForm.photoDirectory = photoDirTextBox.Text; ;
-            progressForm.videoCodecName = videoCodecComboBox.SelectedText;
-            progressForm.slideDuration = (int)slideDurationNumUpDown.Value;
+            string videoCodecName = videoCodecComboBox.SelectedText;
+            int slideDuration = (int)slideDurationNumUpDown.Value;
+
+            ProgressForm progressForm = new ProgressForm(
+                sortingMethod,
+                photoDirectory,
+                videoOutputFile,
+                videoCodecName,
+                slideDuration
+            );
 
             progressForm.Show();
         }
