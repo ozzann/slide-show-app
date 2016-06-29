@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AForge.Video.FFMPEG;
+using System.Reflection;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace MySlideShow
 {
@@ -13,6 +15,7 @@ namespace MySlideShow
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
+
         static void Main()
         {
             Application.EnableVisualStyles();
@@ -20,5 +23,7 @@ namespace MySlideShow
             Application.Run(new MainForm());
         }
     }
+
+
 
 }

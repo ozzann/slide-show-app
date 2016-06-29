@@ -19,14 +19,6 @@ namespace MySlideShow
         public string sortingMethod, photoDirectory, videoCodecName, videoOutputFile;
         public int slideDuration;
 
-        //public static string videoOutputFile;
-        //public string GetOutputFile()
-        //{
-        //    return videoOutputFile;
-        //}
-
-        public ProgressForm() { }
-
         public ProgressForm(
             string sortingMethod,
             string photoDirectory,
@@ -79,8 +71,8 @@ namespace MySlideShow
             VideoCodec codec = GetVideoCodec(videoCodecName);
 
             // size of video frame
-            int width = 4000;
-            int height = 3000;
+            int width = 1100;
+            int height = 800;
 
             writer.Open(videoOutputFile, width, height, 1, codec);
 
@@ -144,26 +136,28 @@ namespace MySlideShow
             // get image of current photo
             Image photoImg = Image.FromFile(photoName);
             Bitmap frameBmp = new Bitmap(photoImg, width, height);
-            photoImg.Dispose();
 
             // paint frame in black
             SolidBrush BlackBrush = new SolidBrush(Color.Black);
-            Graphics gOff = Graphics.FromImage(frameBmp);
-            gOff.SmoothingMode = SmoothingMode.HighQuality;
-            gOff.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            gOff.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            gOff.FillRectangle(BlackBrush, 0, 0, width, height);
+            Graphics graphics = Graphics.FromImage(frameBmp);
+            graphics.SmoothingMode = SmoothingMode.HighQuality;
+            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            graphics.FillRectangle(BlackBrush, 0, 0, width, height);
 
             // rescaling the image
             Bitmap photoBmp = ResizeImage(photoName, width, height);
+            photoBmp.SetResolution(photoImg.HorizontalResolution,
+                         photoImg.VerticalResolution);
+            photoImg.Dispose();
 
             // get a position for the photo in the rectangle
             Point photoPos = GetImageLocationInRectangle(photoBmp, width, height);
             // locate the photo in the middle of the black rectangle
-            gOff.DrawImage(photoBmp,
+            graphics.DrawImage(photoBmp,
                 photoPos.X, photoPos.Y,
                 photoBmp.Width, photoBmp.Height);
-            gOff.Dispose();
+            graphics.Dispose();
             photoBmp.Dispose();
 
             for (var counter = 1; counter <= slideDuration; counter++)

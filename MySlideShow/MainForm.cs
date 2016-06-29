@@ -12,6 +12,7 @@ using AForge.Video.FFMPEG;
 using System.Collections;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Reflection;
 
 namespace MySlideShow
 {
@@ -30,7 +31,6 @@ namespace MySlideShow
             // set default values in the form
             videoCodecComboBox.SelectedIndex = 0;
             titleSortRadio.Checked = true;
-            videoOutputTextBox.Text = DEFAULT_OUTPUT_FILE;
 
         }
 
@@ -40,6 +40,8 @@ namespace MySlideShow
             if ( !string.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath) )
             {
                 photoDirTextBox.Text = folderBrowserDialog1.SelectedPath;
+                videoOutputTextBox.Text = photoDirTextBox.Text + "\\" +
+                    DEFAULT_OUTPUT_FILE;
             }
         }
 
@@ -72,6 +74,13 @@ namespace MySlideShow
             if( !Directory.Exists(photoDirectory))
             {
                 MessageBox.Show("Directory " + photoDirectory +" doesn't exist", 
+                    "Input data error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(videoOutputTextBox.Text))
+            {
+                MessageBox.Show("Video output file name can't be empty!",
                     "Input data error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
